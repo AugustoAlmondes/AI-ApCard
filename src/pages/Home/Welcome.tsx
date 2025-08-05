@@ -103,8 +103,11 @@ export default function Welcome() {
                 </div>
 
                 <div
-                    className={`absolute inset-0 w-full h-full bg-gradient-to-br from-white/0 to-black`}
-                ></div>
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                >
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-white/0 to-black" />
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
+                </div>
             </motion.div>
         </>
     );
