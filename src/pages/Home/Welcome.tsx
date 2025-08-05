@@ -2,7 +2,7 @@ import Video from '/video/video2.mp4';
 import { motion } from 'motion/react'
 export default function Welcome() {
     return (
-        <>
+        <div id='home'>
             <motion.div className="h-screen w-full relative p-4 bg-black overflow-hidden">
                 <motion.video
                     initial={{ opacity: 0 }}
@@ -84,6 +84,8 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.9 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 3.5, duration: 1 }}
                             className={`bg-[#0984E9] text-white p-1 w-45 md:w-50 rounded-xl md:rounded-lg cursor-pointer hover:bg-[#0984E9]/50 trasition-colors duration-200`}>Começar</motion.button>
 
                         <motion.hr
@@ -97,6 +99,8 @@ export default function Welcome() {
                             whileInView={{ opacity: 1, y: 0 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.9 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 3.7, duration: 1 }}
                             className={`bg-transparent border-1 border-white/60 text-white p-1 w-45 md:w-50 rounded-xl md:rounded-lg cursor-pointer hover:bg-white/10 trasition-colors duration-200`}
                         >Sobre</motion.button>
                     </motion.div>
@@ -109,6 +113,6 @@ export default function Welcome() {
                     <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black via-transparent to-transparent" />
                 </div>
             </motion.div>
-        </>
+        </div>
     );
 }
