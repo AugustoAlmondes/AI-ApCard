@@ -3,7 +3,7 @@ import { AboutInfos } from "../../data/AboutInfos";
 
 export default function About() {
     return (
-        <div id='about' className={`bg-black min-h-[80vh] w-full p-10 md:p-20 relative`}>
+        <div id='about' className={`bg-black min-h-[60vh] w-full p-10 md:p-20 relative`}>
             <motion.h1
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
