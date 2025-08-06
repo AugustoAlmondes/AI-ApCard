@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import About from "./About";
 import Preview from "./Preview";
@@ -11,7 +10,6 @@ export default function Home() {
             <Welcome />
             <About />
             <Preview />
-            <Footer />
         </>
     );
 }
