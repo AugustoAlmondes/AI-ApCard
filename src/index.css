@@ -11,3 +11,37 @@
     -webkit-mask-composite: xor;
     mask-composite: exclude;
 }
+
+/* Create a typing animation where three circles move up and down along the y-axis */
+@keyframes typing {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+.typing-dots {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 40px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation: typing 1s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
