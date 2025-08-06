@@ -1,8 +1,11 @@
 import { motion } from 'motion/react';
 import { useState, useEffect } from 'react';
 import scrollToDiv from '../utils/scrollToDiv';
+import { useNavigate } from 'react-router';
 
 export default function Header() {
+
+  const navigate = useNavigate();
   const [scroll, setScroll] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,13 +22,17 @@ export default function Header() {
     { name: 'Home', ref: 'home' },
     { name: 'Sobre', ref: 'about' },
     { name: 'Desenvolvedor', ref: 'https://augusto-almondes.netlify.app' },
-    { name: 'Começar', ref: '#' }
+    { name: 'Começar', ref: '/chat' }
   ];
 
   const handleNavClick = (item: { name: string; ref: string }) => {
     if (item.name === 'Desenvolvedor') {
       window.open(item.ref, '_blank');
-    } else {
+    }
+    if (item.name === 'Começar') {
+      navigate('/chat');
+    }
+    else {
       scrollToDiv(item.ref);
     }
     setIsOpen(false); // Fecha o menu ao clicar em um item
@@ -46,7 +53,9 @@ export default function Header() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 4.2 }}
           >
-            <span className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white to-[#BFE2FF]">
+            <span 
+            onClick={() => navigate('/')}
+            className="text-xl font-semibold bg-clip-text cursor-pointer text-transparent bg-gradient-to-r from-white to-[#BFE2FF]">
               AI ApCard
             </span>
           </motion.div>
@@ -63,7 +72,7 @@ export default function Header() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 4 + index * 0.1 }}
                 onClick={() => handleNavClick(item)}
-                className={`text-[#BFE2FF] hover:text-white hover:cursor-pointer transition-colors duration-200 px-3 py-1 rounded-md ${item.name === 'Começar' ? 'bg-[#0984E9] hover:bg-[#0984E9]/90 text-white' : ''}`}
+                className={`text-[#BFE2FF] hover:text-white  hover:cursor-pointer transition-colors duration-200 px-3 py-1 rounded-md ${item.name === 'Começar' ? 'bg-[#0984E9] hover:bg-[#0984E9]/90 text-white' : ''}`}
               >
                 {item.name}
               </motion.button>
@@ -74,7 +83,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-[#BFE2FF] hover:text-white focus:outline-none"
+              className="text-[#BFE2FF] hover:text-white focus:outline-none cursor-pointer"
               aria-label="Menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +112,7 @@ export default function Header() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 onClick={() => handleNavClick(item)}
-                className={`block w-full ${item.name !== 'Começar' ? 'text-left':''} text-[#BFE2FF] hover:text-white transition-colors duration-200 px-3 py-2 rounded-md ${item.name === 'Começar' ? 'bg-[#0984E9] hover:bg-[#0984E9]/90 text-white text-center' : ''}`}
+                className={`cursor-pointer block w-full ${item.name !== 'Começar' ? 'text-left' : ''} text-[#BFE2FF] hover:text-white transition-colors duration-200 px-3 py-2 rounded-md ${item.name === 'Começar' ? 'bg-[#0984E9] hover:bg-[#0984E9]/90 text-white text-center' : ''}`}
               >
                 {item.name}
               </motion.button>

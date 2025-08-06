@@ -1,12 +1,13 @@
 import { motion } from 'motion/react';
-import { Outlet } from 'react-router';
+import { useNavigate } from 'react-router';
+import scrollToDiv from '../utils/scrollToDiv';
 
 export default function Footer() {
+
+    const navigate = useNavigate()
+
     return (
         <>
-        <main>
-            <Outlet />
-        </main>
             <footer className="relative w-full bg-black overflow-hidden border-t border-[#72C0FF]/10">
                 {/* Gradiente decorativo */}
                 <div className="absolute inset-0 z-0 opacity-10">
@@ -42,12 +43,18 @@ export default function Footer() {
                             className="flex flex-col items-center md:items-start"
                         >
                             <h3 className="text-lg font-medium text-center text-white mb-4">Navegação</h3>
-                            <ul className="space-y-2 text-center sm:text-start">
+                            <ul className="space-y-2 text-center md:text-start">
                                 {['Inicio', 'Sobre', 'Começar'].map((item, index) => (
                                     <li key={index}>
-                                        <a href="#" className="text-[#BFE2FF] hover:text-white transition-colors duration-200">
+                                        <p
+                                            onClick={() => {
+                                                if (item === 'Inicio') { scrollToDiv('home') }
+                                                if (item === 'Sobre') { scrollToDiv('about') }
+                                                if (item === 'Começar') { navigate('/chat') }
+                                            }}
+                                            className="text-[#BFE2FF] hover:text-white transition-colors duration-200 cursor-pointer">
                                             {item}
-                                        </a>
+                                        </p>
                                     </li>
                                 ))}
                             </ul>

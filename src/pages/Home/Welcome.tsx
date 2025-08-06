@@ -1,5 +1,7 @@
 import Video from '/video/video2.mp4';
 import { motion } from 'motion/react'
+import { Link } from 'react-router';
+import scrollToDiv from '../../utils/scrollToDiv';
 export default function Welcome() {
     return (
         <div id='home'>
@@ -79,14 +81,16 @@ export default function Welcome() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 3 }}
                         className={`flex items-center justify-center flex-col md:flex-row gap-4`}>
-                        <motion.button
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.9 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 3.5, duration: 1 }}
-                            className={`bg-[#0984E9] text-white p-1 w-45 md:w-50 rounded-xl md:rounded-lg cursor-pointer hover:bg-[#0984E9]/50 trasition-colors duration-200`}>Começar</motion.button>
+                        <Link to='/chat'>
+                            <motion.button
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.9 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 3, duration: 1 }}
+                                className={`bg-[#0984E9] text-white p-1 w-45 md:w-50 rounded-xl md:rounded-lg cursor-pointer hover:bg-[#0984E9]/50 trasition-colors duration-200`}>Começar</motion.button>
+                        </Link>
 
                         <motion.hr
                             initial={{ opacity: 0 }}
@@ -95,6 +99,9 @@ export default function Welcome() {
                             className={`w-[80%] border-1 border-[#BFE2FF]/60 md:rotate-90 md:h-0 md:w-10`} />
 
                         <motion.button
+                            onClick={() => {
+                                scrollToDiv('about')
+                            }}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             whileHover={{ scale: 1.05 }}
