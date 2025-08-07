@@ -9,7 +9,7 @@ export default function UserBalloon({ text, time }: { text: string, time: string
                         className={'relative bg-[#B4DDFF] text-md text-black pl-3 pr-5 py-4 rounded-xl rounded-tr-none mr-2 max-w-[72vw]'}>
                         {text}
 
-                        <div className={`absolute text-white opacity-30 bottom-[-20px] text-sm font-extralight right-2`}>{time}</div>
+                        <div className={`absolute text-white opacity-30 bottom-[-23px] text-sm font-extralight right-2`}>{time}</div>
                     </div>
                 </div>
                 <hr className={`border-1 border-[#b4ddff0e] w-[95%] mx-auto mt-10`} />
