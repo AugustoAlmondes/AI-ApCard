@@ -23,7 +23,7 @@ export default function BotBalloon({ text, time, typing }: {
                         (
                             response.split('').map((char, index) => (
                                 <motion.span
-                                    className={`text-[#BFE2FF]`}
+                                    className={`text-[#BFE2FF] font-semibold`}
                                     key={index}
                                     initial={{ opacity: 0, y: 40 }}
                                     animate={{ opacity: 1, y: 0 }}
