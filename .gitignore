@@ -20,6 +20,7 @@ dist-ssr
 *.suo
 .env
 *.ntvs*
+.env
 *.njsproj
 *.sln
 *.sw?
