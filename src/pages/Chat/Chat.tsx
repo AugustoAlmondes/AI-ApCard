@@ -7,10 +7,12 @@ import { useEffect, useRef, useState } from "react";
 import { useChat } from "../../hooks/useChat";
 import { ThreeDot } from "react-loading-indicators";
 import Background from "/src/assets/background.mp4";
+import { TbReload } from "react-icons/tb";
+
 
 export default function Chat() {
     const navigate = useNavigate();
-    const { messages, sendMessage, disableButton } = useChat();
+    const { messages, sendMessage, disableButton, finallyChat } = useChat();
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const [inputValue, setInputValue] = useState('');
 
@@ -69,31 +71,44 @@ export default function Chat() {
             </div>
 
             <div className="absolute bottom-0 left-0 w-full flex justify-center bg-gradient-to-t from-[#001323] to-transparent py-6">
-                <form
-                    onSubmit={handleSubmit}
-                    className="grid grid-cols-[2fr_0.5fr] w-full max-w-2xl gap-2 px-4">
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={(e) => setInputValue(e.target.value)}
-                        placeholder="Digite sua mensagem..."
-                        className="flex-1 bg-[#0a223a] text-white rounded-lg px-4 py-3 outline-none border border-[#1a2e47] focus:border-[#0984E9] transition relative z-[2]"
-                    />
-                    {
-                        disableButton ? (
-                            <div className="flex items-center justify-center text-[white] px-5 py-3 rounded-lg relative z-[2]">
-                                <ThreeDot color="#fff" size="small" />
-                            </div>
-                        ) : (
-                            <button
-                                type="submit"
-                                className="flex items-center gap-2 bg-[#0984E9] text-[white] px-5 py-3 rounded-lg hover:bg-[#0984E9] transition relative z-[2]"
-                            >
-                                Enviar <BiSend size={20} />
-                            </button>
-                        )
-                    }
-                </form>
+                {
+                    finallyChat ?
+                        <button
+                            className="bg-transparent text-[white] px-5 py-3 rounded-lg hover:text-[#0984E9] transition relative z-[2] cursor-pointer flex items-center gap-2 justify-center"
+                            onClick={() => {
+                                window.location.reload();
+                            }}
+                        >
+                            Nova Conversa
+                            <TbReload className="hover:rotate-90 transition-transform duration-300" size={20}/>
+                        </button>
+                        :
+                        <form
+                            onSubmit={handleSubmit}
+                            className="grid grid-cols-[2fr_0.5fr] w-full max-w-2xl gap-2 px-4">
+                            <input
+                                type="text"
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                placeholder="Digite sua mensagem..."
+                                className="flex-1 bg-[#0a223a] text-white rounded-lg px-4 py-3 outline-none border border-[#1a2e47] focus:border-[#0984E9] transition relative z-[2]"
+                            />
+                            {
+                                disableButton ? (
+                                    <div className="flex items-center justify-center text-[white] px-5 py-3 rounded-lg relative z-[2]">
+                                        <ThreeDot color="#fff" size="small" />
+                                    </div>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className="flex items-center gap-2 bg-[#0984E9] text-[white] px-5 py-3 rounded-lg hover:bg-[#0984E9] transition relative z-[2]"
+                                    >
+                                        Enviar <BiSend size={20} />
+                                    </button>
+                                )
+                            }
+                        </form>
+                }
                 <div className={`absolute bottom-0 left-0 w-full flex justify-center bg-gradient-to-t via-[#001323] from-[#021728] to-transparent py-23 z-[0]`} />
             </div>
         </div>

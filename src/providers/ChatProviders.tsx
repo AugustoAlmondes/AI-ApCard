@@ -6,7 +6,6 @@ import type { Data } from "../service/api"
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
-    // Apenas a introdução aparece no início
     const [messages, setMessages] = useState<Message[]>([
         {
             id: 'intro',
@@ -20,6 +19,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [disableButton, setDisableButton] = useState<boolean>(false);
+    const [finallyChat, setFinallyChat] = useState<boolean>(false);
 
     const questions: Question[] = [
         { id: 1, text: 'Qual é o seu nome completo?', field: 'name' },
@@ -29,7 +29,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         { id: 5, text: 'Qual é o objetivo desta carta de apresentação?', field: 'objective' },
     ];
 
-    // ➤ Após a introdução terminar de "digitar", enviar automaticamente a primeira pergunta
     useEffect(() => {
         const timer = setTimeout(() => {
             setMessages(prev =>
@@ -38,7 +37,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
                 )
             );
 
-            // Depois que a introdução termina, envia a primeira pergunta
             setTimeout(() => {
                 const firstQuestion: Message = {
                     id: Date.now().toString(),
@@ -50,7 +48,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
                 setMessages(prev => [...prev, firstQuestion]);
             }, 600);
 
-        }, 1500); // tempo do efeito de digitação
+        }, 1500);
 
         return () => clearTimeout(timer);
     }, []);
@@ -92,12 +90,15 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
                         )
                     );
                 }, 1200);
+
+                setDisableButton(false); // ← botão libera normalmente nas perguntas intermediárias
+
             }, 800);
 
             setCurrentQuestion(prev => prev + 1);
 
         } else {
-            // Última pergunta respondida → gerar carta
+            // Última pergunta
             setTimeout(() => {
                 const botMessage: Message = {
                     id: Date.now().toString(),
@@ -108,8 +109,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
                 };
 
                 setMessages(prev => [...prev, botMessage]);
-
-                
             }, 800);
 
             const finalPrompt = `
@@ -144,29 +143,41 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
                     }
                 ]
             }
+
+            // Continua desabilitado até a API responder
             setDisableButton(true);
+
             query(payload).then((res) => {
-                const botResponse: Message = {
-                    id: Date.now().toString(),
-                    text: res,
-                    sender: 'bot',
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    isTyping: false,
-                };
+                if (res === "Erro") {
+                    const botResponse: Message = {
+                        id: Date.now().toString(),
+                        text: "Algo deu errado. Tente novamente mais tarde",
+                        sender: 'bot',
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                        isTyping: false,
+                    };
+                    setMessages(prev => [...prev, botResponse]);
+                    setDisableButton(false);
+                    setFinallyChat(true);
+                } else {
+                    const botResponse: Message = {
+                        id: Date.now().toString(),
+                        text: res,
+                        sender: 'bot',
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                        isTyping: false,
+                    };
+                    setMessages(prev => [...prev, botResponse]);
+                    setDisableButton(false);
+                    setFinallyChat(true);
+                }
 
-                setMessages(prev => [...prev, botResponse]);
             });
-
-            setDisableButton(false);
         }
-
-        setTimeout(() => {
-            setDisableButton(false);
-        }, 1000);
     };
 
     return (
-        <ChatContext.Provider value={{ messages, currentQuestion, answers, sendMessage, disableButton }}>
+        <ChatContext.Provider value={{ messages, currentQuestion, answers, sendMessage, disableButton, finallyChat, setFinallyChat}}>
             {children}
         </ChatContext.Provider>
     );
