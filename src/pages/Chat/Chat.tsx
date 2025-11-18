@@ -1,15 +1,13 @@
 import { BiSend } from "react-icons/bi";
 import BotBalloon from "../../components/BotBalloon";
 import UserBalloon from "../../components/UserBalloon";
-import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "../../hooks/useChat";
 import { ThreeDot } from "react-loading-indicators";
 import Background from "/src/assets/background.mp4";
 import { TbReload } from "react-icons/tb";
-import { RiChat4Line, RiChatNewLine } from "react-icons/ri";
-import { IoArrowBackSharp } from "react-icons/io5";
+import { RiChat4Line} from "react-icons/ri";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 

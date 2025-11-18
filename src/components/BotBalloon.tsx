@@ -2,7 +2,6 @@
 import { FaCircle } from "react-icons/fa";
 import { RiRobot2Fill } from "react-icons/ri";
 import { motion } from 'motion/react'
-import { MdContentCopy } from "react-icons/md";
 import { LuCopy } from "react-icons/lu";
 
 export default function BotBalloon({ text, time, typing }: {
