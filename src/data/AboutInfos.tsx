@@ -7,7 +7,7 @@ export const AboutInfos: AboutInfo[] = [
     {
         icon: <FaLightbulb className={`text-[#0984E9] md:text-3xl text-4xl`} />,
         title: 'Propósito',
-        description: ' O AI ApCart nasceu com o objetivo de simplificar a criação de cartas de apresentação profissionais e personalizadas.'
+        description: ' O AI ApCart nasceu com o objetivo de simplificar a criação de apresentações profissionais e personalizadas.'
     },
     {
         icon: <MdEmail className={`text-[#0984E9] text-4xl md:text-3xl`} />,

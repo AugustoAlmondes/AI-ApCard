@@ -61,7 +61,7 @@ export default function Welcome() {
                         className={`text-[#BFE2FF] md:text-xl font-thin text-center px-5 mb-10`}>
                         {
 
-                            'Transforme suas experiências em palavras de impacto. Gere cartas de apresentação profissionais com o poder da IA.'.split('').map((char, index) => (
+                            'Transforme suas experiências em palavras de impacto. Gere um perfil profissional com o poder da IA.'.split('').map((char, index) => (
                                 <motion.span
                                     className={`text-[#BFE2FF]`}
                                     key={index}

@@ -2,6 +2,8 @@
 import { FaCircle } from "react-icons/fa";
 import { RiRobot2Fill } from "react-icons/ri";
 import { motion } from 'motion/react'
+import { MdContentCopy } from "react-icons/md";
+import { LuCopy } from "react-icons/lu";
 
 export default function BotBalloon({ text, time, typing }: {
     text: string;
@@ -17,7 +19,7 @@ export default function BotBalloon({ text, time, typing }: {
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center"><RiRobot2Fill size={25} color="#0984E9" /></div>
 
             <div
-                className={'relative bg-[#0984E9] text-md text-white pl-3 pr-5 py-4 rounded-xl ml-2 w-max max-w-[72vw] transition-transform duration-500'} >
+                className={'relative bg-[#0984E9] text-md text-white pl-3 pr-5 py-4 rounded-xl ml-2 w-max max-w-[72vw] md:max-w-[35vw] transition-transform duration-500'} >
                 {
                     finishedRes ?
                         (
@@ -53,6 +55,12 @@ export default function BotBalloon({ text, time, typing }: {
                 }
 
                 <div className={`absolute bottom-[-23px] text-sm font-extralight left-2 opacity-30`}>{time}</div>
+
+                <div className={`absolute bottom-[-21px] w-[1px] h-[15px] bg-white opacity-30 left-12`}/>
+
+                <div className={`absolute bottom-[-23px] text-sm font-extralight left-15 opacity-30  hover:opacity-70 cursor-pointer transition-opacity duration-300`}>
+                    <LuCopy size={17} onClick={() => navigator.clipboard.writeText(response)} />
+                    </div>
             </div>
         </div >
     );

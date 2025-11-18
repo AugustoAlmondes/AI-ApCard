@@ -12,7 +12,7 @@ export default function About() {
                 className={`text-4xl md:text-6xl text-center font-semibold 
             background-clip-text text-transparent bg-clip-text bg-gradient-to-r from-white to-[#BFE2FF]`}>
                 {
-                    'Conheça a Inteligência por Trás das suas Cartas'.split('').map((char, index) => (
+                    'Conheça a Inteligência por Trás de Tudo'.split('').map((char, index) => (
                         <motion.span
                             key={index}
                             initial={{ opacity: 0, y: 40 }}
@@ -31,7 +31,7 @@ export default function About() {
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 2.5 }}
                 className={`text-white text-center mt-5 font-extralight text-md md:text-xl mb-20`}>
-                {'Transforme suas experiências em palavras de impact. Gere Cartas de apresentação profissionais com o poder da IA.'.split('').map((char, index) => (
+                {'Transforme suas experiências em palavras de impact. Gere apresentações profissionais com o poder da IA.'.split('').map((char, index) => (
                     <motion.span
                         key={index}
                         initial={{ opacity: 0, y: 40 }}

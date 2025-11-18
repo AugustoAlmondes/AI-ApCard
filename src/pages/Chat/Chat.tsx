@@ -8,6 +8,9 @@ import { useChat } from "../../hooks/useChat";
 import { ThreeDot } from "react-loading-indicators";
 import Background from "/src/assets/background.mp4";
 import { TbReload } from "react-icons/tb";
+import { RiChat4Line, RiChatNewLine } from "react-icons/ri";
+import { IoArrowBackSharp } from "react-icons/io5";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 export default function Chat() {
@@ -43,10 +46,16 @@ export default function Chat() {
             <div className={`absolute top-0 left-5 flex items-center gap-2 justify-center py-4 z-20 text-white text-md opacity-50 hover:opacity-100 cursor-pointer`}
                 onClick={() => navigate('/')}
             >
-                <BsArrowLeft size={20} /> Voltar
+                <IoMdArrowRoundBack /> Voltar
             </div>
 
             <h3 className={`absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center py-4 z-20 text-white text-md opacity-50`}>Ap Robot</h3>
+
+            <div className="absolute top-0 right-5 flex items-center gap-2 justify-center py-4 z-20 text-white text-md opacity-50 hover:opacity-100 cursor-pointer" onClick={() => {window.location.reload()}}>
+                <RiChat4Line />
+                Novo Chat
+            </div>
+
 
             <div
                 ref={chatContainerRef}
@@ -80,7 +89,7 @@ export default function Chat() {
                             }}
                         >
                             Nova Conversa
-                            <TbReload className="hover:rotate-90 transition-transform duration-300" size={20}/>
+                            <TbReload className="hover:rotate-90 transition-transform duration-300" size={20} />
                         </button>
                         :
                         <form
