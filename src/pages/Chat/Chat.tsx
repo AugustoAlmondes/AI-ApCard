@@ -1,6 +1,7 @@
 import { BiSend } from "react-icons/bi";
 import BotBalloon from "../../components/BotBalloon";
 import UserBalloon from "../../components/UserBalloon";
+
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { useChat } from "../../hooks/useChat";
@@ -35,9 +36,9 @@ export default function Chat() {
     }, [messages, disableButton]);
 
     return (
-        <div className="relative flex flex-col items-center py-7 h-screen">
+        <div className="relative flex flex-col items-center py-7 h-screen bg-black">
             <a className="text-white/10 z-10 absolute bottom-0 text-sm font-extralight" href="https://www.vecteezy.com/free-videos/abstract" target="_blank">Abstract Stock Videos by Vecteezy</a>
-            <video src={Background} autoPlay loop muted className="h-[90%] w-full object-cover absolute filter brightness-60 z-[-1]"></video>
+            <video src={Background} autoPlay loop muted className="h-[90%] w-full object-cover absolute filter brightness-60 z-[0]"></video>
 
             <div className={`absolute top-0 left-0 w-full flex justify-center bg-gradient-to-b via-[#001323] from-[#021728] to-transparent py-10 z-20`} />
 
