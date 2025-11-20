@@ -6,7 +6,7 @@ import type { Data } from "../service/api"
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
-    const [messages, setMessages] = useState<Message[]>([
+    const initialMessages: Message[] = [
         {
             id: 'intro',
             text: 'Bem-vindo(a) ao AI ApCard! Eu sou o Ap Robot e vou ajudar você a criar um perfil profissional claro, marcante e alinhado aos seus objetivos. Para montar um texto personalizado e de alto impacto, vou fazer algumas perguntas rápidas sobre você. Responda com tranquilidade — cada detalhe ajuda a deixar seu perfil ainda melhor.',
@@ -14,8 +14,9 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             isTyping: true
         }
-    ]);
+    ];
 
+    const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [answers, setAnswers] = useState<Record<string, string>>({});
     const [disableButton, setDisableButton] = useState<boolean>(false);
@@ -29,7 +30,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         { id: 5, text: 'Qual é o principal objetivo do seu perfil profissional?', field: 'objective' },
     ];
 
-    useEffect(() => {
+    const startInitialChat = () => {
         const timer = setTimeout(() => {
             setMessages(prev =>
                 prev.map(msg =>
@@ -51,8 +52,20 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
         }, 1500);
 
         return () => clearTimeout(timer);
+    }
+
+    useEffect(() => {
+        startInitialChat();
     }, []);
 
+    const resetChat = () => {
+        setMessages(initialMessages);
+        setCurrentQuestion(0);
+        setAnswers({});
+        setDisableButton(false);
+        setFinallyChat(false);
+        startInitialChat();
+    }
     const sendMessage = (text: string) => {
         setDisableButton(true);
 
@@ -176,7 +189,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     };
 
     return (
-        <ChatContext.Provider value={{ messages, currentQuestion, answers, sendMessage, disableButton, finallyChat, setFinallyChat }}>
+        <ChatContext.Provider value={{ messages, currentQuestion, answers, sendMessage, disableButton, finallyChat, setFinallyChat, resetChat }}>
             {children}
         </ChatContext.Provider>
     );

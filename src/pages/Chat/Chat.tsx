@@ -14,7 +14,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function Chat() {
     const navigate = useNavigate();
-    const { messages, sendMessage, disableButton, finallyChat } = useChat();
+    const { messages, sendMessage, disableButton, finallyChat, resetChat } = useChat();
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const [inputValue, setInputValue] = useState('');
 
@@ -50,7 +50,7 @@ export default function Chat() {
 
             <h3 className={`absolute top-0 left-1/2 transform -translate-x-1/2 flex justify-center py-4 z-20 text-white text-md opacity-50`}>Ap Robot</h3>
 
-            <div className="absolute top-0 right-5 flex items-center gap-2 justify-center py-4 z-20 text-white text-md opacity-50 hover:opacity-100 cursor-pointer" onClick={() => {window.location.reload()}}>
+            <div className="absolute top-0 right-5 flex items-center gap-2 justify-center py-4 z-20 text-white text-md opacity-50 hover:opacity-100 cursor-pointer" onClick={() => {resetChat()}}>
                 <RiChat4Line />
                 Novo Chat
             </div>
@@ -84,7 +84,7 @@ export default function Chat() {
                         <button
                             className="bg-transparent text-[white] px-5 py-3 rounded-lg hover:text-[#0984E9] transition relative z-[2] cursor-pointer flex items-center gap-2 justify-center"
                             onClick={() => {
-                                window.location.reload();
+                                resetChat();
                             }}
                         >
                             Nova Conversa

@@ -3,6 +3,7 @@ import { FaCircle } from "react-icons/fa";
 import { RiRobot2Fill } from "react-icons/ri";
 import { motion } from 'motion/react'
 import { LuCopy } from "react-icons/lu";
+import { toast } from "react-toastify";
 
 export default function BotBalloon({ text, time, typing }: {
     text: string;
@@ -55,11 +56,15 @@ export default function BotBalloon({ text, time, typing }: {
 
                 <div className={`absolute bottom-[-23px] text-sm font-extralight left-2 opacity-30`}>{time}</div>
 
-                <div className={`absolute bottom-[-21px] w-[1px] h-[15px] bg-white opacity-30 left-12`}/>
+                <div className={`absolute bottom-[-21px] w-[1px] h-[15px] bg-white opacity-30 left-12`} />
 
                 <div className={`absolute bottom-[-23px] text-sm font-extralight left-15 opacity-30  hover:opacity-70 cursor-pointer transition-opacity duration-300`}>
-                    <LuCopy size={17} onClick={() => navigator.clipboard.writeText(response)} />
-                    </div>
+                    <LuCopy size={17} onClick={() => {
+                        navigator.clipboard.writeText(response).then(()=>{
+                            toast.success('Copiado com sucesso!');
+                        })
+                    }} />
+                </div>
             </div>
         </div >
     );

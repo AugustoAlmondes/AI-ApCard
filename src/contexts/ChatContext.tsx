@@ -9,6 +9,7 @@ interface ChatContextType {
     disableButton: boolean;
     finallyChat: boolean;
     setFinallyChat: (value: boolean) => void;
+    resetChat: () => void;
 }
 
 export const ChatContext = createContext<ChatContextType | undefined>(undefined);
